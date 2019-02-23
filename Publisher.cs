@@ -9,6 +9,13 @@ namespace NetMQ
     {
         public Publisher()
         {
+        }
+
+        /// <summary>
+        /// Create a publishersocket and send data
+        /// </summary>
+        public void Publish()
+        {
             Random rand = new Random(50);
 
             using (var pubSocket = new PublisherSocket())
@@ -17,26 +24,12 @@ namespace NetMQ
                 pubSocket.Options.SendHighWatermark = 1000;
                 pubSocket.Bind("tcp://*:12345");
 
-                for (var i = 0; i < 100; i++)
-                {
-                    var randomizedTopic = rand.NextDouble();
-                    if (randomizedTopic < 0.5)
-                    {
-                        var msg = "TopicA msg-" + i;
-                        Console.WriteLine("Sending message : {0}", msg);
-                        pubSocket.SendMoreFrame("TopicA").SendFrame(msg);
-                    }
-                    else
-                    {
-                        var msg = "TopicB msg-" + i;
-                        Console.WriteLine("Sending message : {0}", msg);
-                        pubSocket.SendMoreFrame("TopicB").SendFrame(msg);
-                    }
 
-                    Thread.Sleep(500);
-                }
+                var msg = "TopicA msg";
+                Console.WriteLine("Sending message : {0}", msg);
+                pubSocket.SendMoreFrame("TopicA").SendFrame(msg);
+
             }
         }
-
     }
 }

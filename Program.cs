@@ -11,9 +11,13 @@ namespace NetMQ
     {
         static void Main(string[] args)
         {
-            
+            PubSubDemo();
         }
 
+
+       /// <summary>
+       /// Request Reply Demo
+       /// </summary>
        private void RequestResponseDemo()
         {
             using (var responseSocket = new ResponseSocket("@tcp://*:5555"))
@@ -33,6 +37,18 @@ namespace NetMQ
                 Console.WriteLine("requestSocket : Received '{0}'", message);
 
                 Console.ReadLine();
+            }
+        }
+
+        private static void PubSubDemo()
+        {
+            Publisher pub = new Publisher();
+            Subscriber sub = new Subscriber();
+
+            while (true)
+            {
+                pub.Publish();
+                sub.Subscribe();
             }
         }
     }
