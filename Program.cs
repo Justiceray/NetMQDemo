@@ -11,7 +11,11 @@ namespace NetMQ
     {
         static void Main(string[] args)
         {
-            PubSubDemo();
+            // PubSubDemo();
+
+            DealerRouter dealerRouter = new DealerRouter();
+
+
         }
 
 
