@@ -35,7 +35,9 @@ namespace NetMQ
                             client.Connect("tcp://127.0.0.1:5556");
                             client.ReceiveReady += Client_ReceivedReady;
                             clientSocketPerThread.Value = client;
-                            poller.Add(client);
+                            poller.Add(client);   
+
+
 
                         }
                         else
